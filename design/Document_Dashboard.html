@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CognitiveOS | Document Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1326;
+            color: #dae2fd;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: rgba(23, 31, 51, 0.6);
+            backdrop-filter: blur(32px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(195, 192, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .shimmer-border {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-border::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(195, 192, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 6s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#5af3dd",
+                        "surface-container-highest": "#2d3449",
+                        "on-surface": "#dae2fd",
+                        "tertiary-fixed-dim": "#3cddc7",
+                        "on-primary": "#1d00a5",
+                        "primary": "#c3c0ff",
+                        "on-background": "#dae2fd",
+                        "surface-container-lowest": "#060e20",
+                        "outline-variant": "#464555",
+                        "on-secondary-fixed": "#000767",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#bdc2ff",
+                        "background": "#0b1326",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "outline": "#918fa1",
+                        "inverse-primary": "#4d44e3",
+                        "on-tertiary-fixed-variant": "#005047",
+                        "surface-variant": "#2d3449",
+                        "inverse-surface": "#dae2fd",
+                        "primary-container": "#4f46e5",
+                        "on-secondary-fixed-variant": "#2f3aa3",
+                        "on-tertiary": "#003731",
+                        "on-secondary": "#131e8c",
+                        "inverse-on-surface": "#283044",
+                        "surface-bright": "#31394d",
+                        "tertiary-fixed": "#62fae3",
+                        "surface-container": "#171f33",
+                        "surface-container-high": "#222a3d",
+                        "tertiary": "#3cddc7",
+                        "on-secondary-container": "#a8afff",
+                        "surface-container-low": "#131b2e",
+                        "tertiary-container": "#006d61",
+                        "surface-tint": "#c3c0ff",
+                        "secondary-container": "#2f3aa3",
+                        "secondary-fixed-dim": "#bdc2ff",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-dim": "#0b1326",
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface-variant": "#c7c4d8",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-primary-container": "#dad7ff",
+                        "error": "#ffb4ab",
+                        "surface": "#0b1326",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "secondary-fixed": "#e0e0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "16px",
+                        "xs": "8px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "lg": "40px",
+                        "xl": "64px",
+                        "base": "4px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["JetBrains Mono"],
+                        "headline-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/10 bg-surface-container-low backdrop-blur-xl shadow-sm flex flex-col py-md z-50">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-xl">memory</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">CognitiveOS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/60">AI Enterprise</p>
+</div>
+</div>
+</div>
+<nav class="flex-1">
+<ul class="space-y-1">
+<li>
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-l-4 border-primary px-6 py-3 flex items-center gap-3 bg-primary/5 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-body-md text-body-md">Knowledge Base</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-body-md text-body-md">AI Chat</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-body-md text-body-md">Insights</span>
+</a>
+</li>
+<li>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</li>
+</ul>
+</nav>
+<div class="px-6 mt-auto">
+<button class="w-full py-3 px-4 bg-primary-container text-on-primary-container rounded-xl font-semibold flex items-center justify-center gap-2 transition-transform active:scale-95">
+<span class="material-symbols-outlined">add</span>
+                New Document
+            </button>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<a class="text-on-surface-variant dark:text-on-surface-variant px-2 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 backdrop-blur-3xl border-b border-outline-variant/10 bg-surface/60 dark:bg-surface/60 z-40 flex items-center justify-between px-md w-auto">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full bg-surface-container-highest/30 border border-outline-variant/20 rounded-full py-2 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all font-body-md text-body-md" placeholder="Search documents, entities, or AI insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high/50 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-high/50 transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="w-px h-6 bg-outline-variant/20 mx-2"></div>
+<button class="flex items-center gap-2 p-1 pl-3 rounded-full hover:bg-surface-container-high/50 transition-all border border-outline-variant/10">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Alex Rivers</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</div>
+</button>
+</div>
+</header>
+<!-- Content Area -->
+<div class="pt-24 px-8 pb-12 max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="flex items-end justify-between mb-10">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">Document Library</h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-lg">Manage your enterprise knowledge assets. Powered by CognitiveOS neural indexing for instant retrieval.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 rounded-lg border border-outline-variant/30 font-body-md flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filter
+                    </button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-semibold flex items-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform active:scale-[0.98]" id="uploadTrigger">
+<span class="material-symbols-outlined">cloud_upload</span>
+                        Upload Document
+                    </button>
+</div>
+</div>
+<!-- Upload Dropzone (Hidden by default) -->
+<div class="hidden mb-10" id="dropzone">
+<div class="w-full h-48 border-2 border-dashed border-primary/40 rounded-2xl bg-primary/5 flex flex-col items-center justify-center gap-3 relative group transition-all hover:border-primary/60 hover:bg-primary/10">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">upload_file</span>
+</div>
+<div class="text-center">
+<p class="font-body-lg text-body-lg text-on-surface">Drag and drop files here</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">PDF, DOCX, TXT up to 50MB per file</p>
+</div>
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface" onclick="toggleDropzone()">
+<span class="material-symbols-outlined">close</span>
+</button>
+<input class="absolute inset-0 opacity-0 cursor-pointer" type="file"/>
+</div>
+</div>
+<!-- Document Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-xl bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-3xl">description</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-tertiary-container/30 text-on-tertiary-container font-label-sm text-[11px] uppercase tracking-wider">Ready</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface truncate mb-1">Q4 Financial Reports.pdf</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">PDF • 12.4 MB</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/10">
+<span class="font-label-sm text-[12px] text-on-surface-variant/60">Uploaded Oct 12, 2023</span>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">article</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-[11px] uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                Processing
+                            </div>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface truncate mb-1">Market Analysis 2024.docx</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">DOCX • 2.8 MB</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/10">
+<span class="font-label-sm text-[12px] text-on-surface-variant/60">Uploaded Oct 14, 2023</span>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-3xl">text_snippet</span>
+</div>
+<span class="px-3 py-1 rounded-full bg-tertiary-container/30 text-on-tertiary-container font-label-sm text-[11px] uppercase tracking-wider">Ready</span>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface truncate mb-1">Developer Guidelines.txt</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">TXT • 142 KB</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/10">
+<span class="font-label-sm text-[12px] text-on-surface-variant/60">Uploaded Oct 15, 2023</span>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Card 4 (Featured Horizontal) -->
+<div class="glass-card rounded-2xl p-6 md:col-span-2 flex flex-col md:flex-row gap-6">
+<div class="md:w-1/3 h-40 rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A high-tech digital document being scanned by a holographic laser interface in a dark, atmospheric workspace. The lighting is dominated by deep indigo and glowing cyan accents, reflecting a futuristic AI-driven data processing environment. The composition is sleek, professional, and corporate modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAO4LLyAOXtFmSzOyeIRH871WsWz2C2jbRn6RS3keC_spmYn_Ed6jAzG5g0I82IyQLsFiy60A1r9LUJfB5m_NkEsw8LqaKuoLnLq4fKYSO9WBu-cNvNljaSN-ak7_b2l1j1Rd-TmqzZb64oHvrVH58DskNJ0GblebhVnoo3nKK9LejvOumekaRlnPs6hNMTfrkoVuFZojiKJL6ShlxAEgUM_FWftOoW3m8ZI6jOUL-CjYEG_7etq2xd6g"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent"></div>
+</div>
+<div class="flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="font-headline-md text-xl text-on-surface">Neural Architecture Specs.pdf</h3>
+<span class="px-3 py-1 rounded-full bg-tertiary-container/30 text-on-tertiary-container font-label-sm text-[11px] uppercase tracking-wider">Ready</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4 line-clamp-2">Complete technical documentation for the new LMM implementation and distributed processing nodes. Includes security whitepapers.</p>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant/60 font-label-sm text-[12px]">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">folder</span> Architecture</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">event</span> 2 days ago</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">history</span> v2.4</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between shimmer-border">
+<div>
+<div class="flex items-start justify-between mb-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">article</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-[11px] uppercase tracking-wider">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                                Processing
+                            </div>
+</div>
+<h3 class="font-headline-md text-lg text-on-surface truncate mb-1">Brand Identity 2024.docx</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-4">DOCX • 18.5 MB</p>
+</div>
+<div class="flex items-center justify-between mt-4 pt-4 border-t border-outline-variant/10">
+<span class="font-label-sm text-[12px] text-on-surface-variant/60">Uploaded Today</span>
+<button class="text-primary hover:bg-primary/10 p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+</div>
+<!-- AI Insight Widget -->
+<div class="mt-12 p-8 rounded-3xl bg-gradient-to-br from-primary/10 via-surface-container/50 to-background border border-primary/20 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+<div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+<div class="w-20 h-20 bg-primary/20 rounded-2xl flex items-center justify-center text-primary border border-primary/30 backdrop-blur-md">
+<span class="material-symbols-outlined text-4xl animate-pulse">auto_awesome</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Library Insights</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">CognitiveOS has analyzed 482 documents. We've detected a significant knowledge gap in your "Project Alpha" documentation series. Would you like to generate a summary of missing entities?</p>
+</div>
+<button class="px-8 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-lg border border-white/20 rounded-xl font-semibold transition-all">
+                        Run Neural Audit
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const uploadTrigger = document.getElementById('uploadTrigger');
+        const dropzone = document.getElementById('dropzone');
+
+        function toggleDropzone() {
+            dropzone.classList.toggle('hidden');
+            if (!dropzone.classList.contains('hidden')) {
+                dropzone.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        uploadTrigger.addEventListener('click', toggleDropzone);
+
+        // Simple animation for the grid items on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body></html>

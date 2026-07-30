@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --glass-bg: rgba(11, 19, 38, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+    body {
+      background-color: #0b1326; /* theme.colors.background */
+      color: #dae2fd; /* theme.colors.on-background */
+      font-family: 'Inter', sans-serif;
+    }
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(32px);
+      border: 1px solid var(--glass-border);
+      border-radius: 1rem; /* xl equivalent */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    .shimmer-border {
+      position: relative;
+    }
+    .shimmer-border::after {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(90deg, transparent, rgba(195, 192, 255, 0.3), transparent);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: shimmer 4s infinite linear;
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-tertiary-container": "#5af3dd",
+                  "surface-container-highest": "#2d3449",
+                  "on-surface": "#dae2fd",
+                  "tertiary-fixed-dim": "#3cddc7",
+                  "on-primary": "#1d00a5",
+                  "primary": "#c3c0ff",
+                  "on-background": "#dae2fd",
+                  "surface-container-lowest": "#060e20",
+                  "outline-variant": "#464555",
+                  "on-secondary-fixed": "#000767",
+                  "on-error-container": "#ffdad6",
+                  "secondary": "#bdc2ff",
+                  "background": "#0b1326",
+                  "primary-fixed-dim": "#c3c0ff",
+                  "outline": "#918fa1",
+                  "inverse-primary": "#4d44e3",
+                  "on-tertiary-fixed-variant": "#005047",
+                  "surface-variant": "#2d3449",
+                  "inverse-surface": "#dae2fd",
+                  "primary-container": "#4f46e5",
+                  "on-secondary-fixed-variant": "#2f3aa3",
+                  "on-tertiary": "#003731",
+                  "on-secondary": "#131e8c",
+                  "inverse-on-surface": "#283044",
+                  "surface-bright": "#31394d",
+                  "tertiary-fixed": "#62fae3",
+                  "surface-container": "#171f33",
+                  "surface-container-high": "#222a3d",
+                  "tertiary": "#3cddc7",
+                  "on-secondary-container": "#a8afff",
+                  "surface-container-low": "#131b2e",
+                  "tertiary-container": "#006d61",
+                  "surface-tint": "#c3c0ff",
+                  "secondary-container": "#2f3aa3",
+                  "secondary-fixed-dim": "#bdc2ff",
+                  "on-error": "#690005",
+                  "error-container": "#93000a",
+                  "surface-dim": "#0b1326",
+                  "on-tertiary-fixed": "#00201c",
+                  "on-surface-variant": "#c7c4d8",
+                  "on-primary-fixed-variant": "#3323cc",
+                  "on-primary-container": "#dad7ff",
+                  "error": "#ffb4ab",
+                  "surface": "#0b1326",
+                  "primary-fixed": "#e2dfff",
+                  "on-primary-fixed": "#0f0069",
+                  "secondary-fixed": "#e0e0ff"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "sm": "16px",
+                  "xs": "8px",
+                  "container-max": "1440px",
+                  "gutter": "24px",
+                  "lg": "40px",
+                  "xl": "64px",
+                  "base": "4px",
+                  "md": "24px"
+          },
+          "fontFamily": {
+                  "label-sm": ["JetBrains Mono"],
+                  "headline-md": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "headline-lg-mobile": ["Inter"],
+                  "body-md": ["Inter"],
+                  "body-lg": ["Inter"],
+                  "display-lg": ["Inter"]
+          },
+          "fontSize": {
+                  "label-sm": ["13px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-background">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant/10 bg-surface-container-low backdrop-blur-xl shadow-sm flex flex-col h-full py-md">
+<div class="px-6 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">CognitiveOS</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant/70 uppercase tracking-widest mt-1">AI Enterprise</p>
+</div>
+<div class="px-4 mb-6">
+<button class="w-full bg-primary-container text-on-primary-container font-headline-md text-[14px] py-3 rounded-xl flex items-center justify-center gap-2 hover:brightness-110 transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]">add</span>
+        New Document
+      </button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-body-md text-body-md">Knowledge Base</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-body-md text-body-md">AI Chat</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-body-md text-body-md">Insights</span>
+</a>
+<!-- Active Link for Settings -->
+<a class="text-primary dark:text-primary-fixed-dim font-bold border-l-4 border-primary px-6 py-3 flex items-center gap-3 bg-primary/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/10 pt-4">
+<a class="text-on-surface-variant dark:text-on-surface-variant px-6 py-3 flex items-center gap-3 hover:bg-white/5 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-md text-body-md">Help Center</span>
+</a>
+<div class="px-6 py-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in a high-tech office environment. Soft blue ambient lighting illuminates the scene, creating a sophisticated corporate-modern vibe. The individual has a confident yet approachable expression, fitting for an AI platform user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA04z2XTWg5b2Ou6oxCyJkETS1QcGKyh7dm9_3ZMiN0oJPEOXB45dxyXTZW0EBXj8dD9qHwDKcIbOn38qGMIesZQUpBpfUTIvq7XLp-0TIqMTSM83ggWSKWVQsxYg-mM-uOBWXK3iDqcFkWf1VNtQOPJHhOuG70-d6mypTzxhbChr_crdvkmQM-INzzSNF5xUdywIi3yae1BnHav16WL5lH9n6yn2rFfj39_zR8IrdPMJ4FvfmNeDRuYQ"/>
+</div>
+<div class="overflow-hidden">
+<p class="font-label-sm text-label-sm text-on-surface truncate">Alex Chen</p>
+<p class="text-[10px] text-on-surface-variant truncate">Enterprise Tier</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 left-64 h-16 backdrop-blur-3xl border-b border-outline-variant/10 flex items-center justify-between px-md w-auto z-10">
+<div class="flex items-center gap-4 bg-surface-container-high/50 px-4 py-1.5 rounded-full border border-outline-variant/5 focus-within:ring-2 focus-within:ring-primary/50 transition-all min-w-[320px]">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm text-on-surface w-full font-body-md" placeholder="Search settings or tools..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-full transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 pb-12 px-12 max-w-[1200px]">
+<header class="mb-10">
+<h2 class="font-headline-lg text-headline-lg mb-2">Account Settings</h2>
+<p class="font-body-lg text-on-surface-variant">Manage your profile, API keys, and track your workspace usage.</p>
+</header>
+<div class="grid grid-cols-12 gap-8">
+<!-- Profile Section (Bento Card) -->
+<section class="col-span-12 md:col-span-8 glass-card p-8">
+<div class="flex items-start justify-between mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">Profile Information</h3>
+<p class="font-body-md text-on-surface-variant">Update your account details and visual presence.</p>
+</div>
+<button class="bg-surface-container-highest px-4 py-2 rounded-lg font-label-sm text-label-sm hover:bg-primary/10 transition-colors">Edit Profile</button>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Full Name</label>
+<div class="font-body-md text-body-md py-2 border-b border-outline-variant/20">Alex Chen</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Email Address</label>
+<div class="font-body-md text-body-md py-2 border-b border-outline-variant/20">a.chen@cognitiveos.ai</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Company</label>
+<div class="font-body-md text-body-md py-2 border-b border-outline-variant/20">NeuroLink Research</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Role</label>
+<div class="font-body-md text-body-md py-2 border-b border-outline-variant/20">Lead Data Scientist</div>
+</div>
+</div>
+</section>
+<!-- Usage Snapshot (Bento Card) -->
+<section class="col-span-12 md:col-span-4 glass-card p-8 flex flex-col justify-between">
+<div class="mb-6">
+<h3 class="font-headline-md text-[20px] mb-1">Current Usage</h3>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Billing cycle: Oct 1 - Oct 31</p>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm">Documents Uploaded</span>
+<span class="font-label-sm text-label-sm text-primary">84 / 200</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[42%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-sm text-label-sm">AI Queries</span>
+<span class="font-label-sm text-label-sm text-tertiary">1,248 / 5,000</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-tertiary w-[25%]"></div>
+</div>
+</div>
+<div class="pt-4 mt-4 border-t border-outline-variant/10 text-center">
+<a class="text-primary font-label-sm text-label-sm hover:underline" href="#">View Detailed Reports →</a>
+</div>
+</div>
+</section>
+<!-- API Key Management (High-end Glass UI) -->
+<section class="col-span-12 glass-card overflow-hidden">
+<div class="p-8 border-b border-outline-variant/10 flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md mb-1">LLM Service Integration</h3>
+<p class="font-body-md text-on-surface-variant">Connect your custom model providers for enterprise autonomy.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-headline-md text-[14px] hover:brightness-110 active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">key</span>
+            Generate New Key
+          </button>
+</div>
+<div class="p-0">
+<table class="w-full text-left font-body-md border-collapse">
+<thead>
+<tr class="text-on-surface-variant/60 font-label-sm text-[12px] uppercase tracking-widest bg-surface-container-high/30">
+<th class="px-8 py-4">Service Provider</th>
+<th class="px-8 py-4">Key ID</th>
+<th class="px-8 py-4">Status</th>
+<th class="px-8 py-4">Last Used</th>
+<th class="px-8 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-8 py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-on-tertiary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">bolt</span>
+</div>
+<div>
+<p class="font-bold">OpenAI GPT-4o</p>
+<p class="text-[12px] text-on-surface-variant">Production Environment</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<code class="font-label-sm text-[13px] bg-surface-container-highest px-2 py-1 rounded">sk-••••4921</code>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span> Active
+                  </span>
+</td>
+<td class="px-8 py-5 text-on-surface-variant">2 mins ago</td>
+<td class="px-8 py-5 text-right">
+<button class="text-on-surface-variant hover:text-on-surface p-1"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-on-surface-variant hover:text-error p-1 ml-2"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-8 py-5 flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">psychology</span>
+</div>
+<div>
+<p class="font-bold">Anthropic Claude 3.5</p>
+<p class="text-[12px] text-on-surface-variant">Research Staging</p>
+</div>
+</td>
+<td class="px-8 py-5">
+<code class="font-label-sm text-[13px] bg-surface-container-highest px-2 py-1 rounded">ant-••••8821</code>
+</td>
+<td class="px-8 py-5">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-tertiary/10 text-tertiary font-label-sm text-[11px]">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span> Active
+                  </span>
+</td>
+<td class="px-8 py-5 text-on-surface-variant">1 hour ago</td>
+<td class="px-8 py-5 text-right">
+<button class="text-on-surface-variant hover:text-on-surface p-1"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-on-surface-variant hover:text-error p-1 ml-2"><span class="material-symbols-outlined">delete</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- Security / Two Factor (Asymmetric Layout) -->
+<section class="col-span-12 md:col-span-6 glass-card p-8">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-secondary-container/20 rounded-2xl text-secondary">
+<span class="material-symbols-outlined text-[32px]">shield_person</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] mb-2">Two-Factor Authentication</h3>
+<p class="font-body-md text-on-surface-variant mb-6">Add an extra layer of security to your enterprise workspace by requiring a second verification step.</p>
+<button class="border border-outline-variant px-6 py-2 rounded-lg font-label-sm text-label-sm hover:bg-white/5 transition-all">Enable 2FA</button>
+</div>
+</div>
+</section>
+<section class="col-span-12 md:col-span-6 glass-card p-8 border-dashed border-primary/30">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-primary-container/20 rounded-2xl text-primary">
+<span class="material-symbols-outlined text-[32px]">webhook</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[20px] mb-2">Workspace Webhooks</h3>
+<p class="font-body-md text-on-surface-variant mb-6">Automate your knowledge flow by sending real-time document events to external systems.</p>
+<button class="bg-primary/10 text-primary px-6 py-2 rounded-lg font-label-sm text-label-sm hover:bg-primary/20 transition-all">Configure Hooks</button>
+</div>
+</div>
+</section>
+</div>
+<!-- AI Workspace Floating Status (Glassmorphism + Shimmer) -->
+<div class="fixed bottom-8 right-8 glass-card shimmer-border p-4 w-72 z-20">
+<div class="flex items-center gap-3">
+<div class="relative w-10 h-10 flex items-center justify-center">
+<div class="absolute inset-0 bg-primary/20 rounded-full animate-ping"></div>
+<span class="material-symbols-outlined text-primary relative">auto_awesome</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Cognitive Core Active</p>
+<div class="flex gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // Micro-interaction for key visibility
+    document.querySelectorAll('[data-icon="visibility"]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        const code = row.querySelector('code');
+        if (code.innerText.includes('•')) {
+          code.innerText = code.dataset.full || 'sk-7362-8114-0921-X';
+          e.target.innerText = 'visibility_off';
+        } else {
+          code.dataset.full = code.innerText;
+          code.innerText = 'sk-••••4921';
+          e.target.innerText = 'visibility';
+        }
+      });
+    });
+
+    // Ambient background interaction
+    document.addEventListener('mousemove', (e) => {
+      const x = e.clientX / window.innerWidth;
+      const y = e.clientY / window.innerHeight;
+      document.body.style.background = `radial-gradient(circle at ${x * 100}% ${y * 100}%, #111a33 0%, #0b1326 60%)`;
+    });
+  </script>
+</body></html>

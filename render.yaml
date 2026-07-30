@@ -1,0 +1,36 @@
+# Render blueprint for the backend API.
+# The database lives on Neon (free tier, pgvector enabled), so DATABASE_URL is
+# supplied manually rather than provisioned here.
+services:
+  - type: web
+    name: ai-knowledge-base-api
+    runtime: docker
+    plan: free
+    region: oregon
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        sync: false # Neon pooled connection string
+      - key: GEMINI_API_KEY
+        sync: false # https://aistudio.google.com/apikey
+      - key: CORS_ORIGINS
+        sync: false # e.g. https://your-app.vercel.app
+      - key: JWT_SECRET
+        generateValue: true
+      # A long-running server can hand the embedding phase to a background task.
+      - key: DEFER_EMBEDDING
+        value: "true"
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "1440"
+      - key: GEMINI_CHAT_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: EMBEDDING_DIMENSIONS
+        value: "768"
+      - key: MAX_UPLOAD_MB
+        value: "10"
+      - key: RETRIEVAL_TOP_K
+        value: "6"
